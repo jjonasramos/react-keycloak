@@ -9,7 +9,7 @@ type KeycloakConfig = {
   "confidential-port": number;
 }
 
-const keycloakConfig: KeycloakConfig = {
+export const keycloakConfig: KeycloakConfig = {
   "realm": "cluster",
   "auth-server-url": "http://localhost:8080/auth/",
   "ssl-required": "external",
@@ -20,12 +20,12 @@ const keycloakConfig: KeycloakConfig = {
 
 export const keycloak = Keycloak({
   url: keycloakConfig["auth-server-url"],
-  realm: keycloakConfig.realm,
+  realm: '',
   clientId: keycloakConfig.resource
 });
 
 export const initKeycloak: Keycloak.KeycloakInitOptions = {
-  onLoad: "login-required",
+  onLoad: "check-sso",
   checkLoginIframe: false,
   pkceMethod: "S256",
   flow: "standard",

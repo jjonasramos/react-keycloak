@@ -1,11 +1,18 @@
 import { Route, Routes as Router } from "react-router-dom";
-import { Home } from "../pages";
+import { SecureRoute } from "../components";
+import { AuthenticationProvider } from "../contexts/Authentication";
+import { Home, Login } from "../pages";
 
 const Routes = () => {
   return (
-    <Router>
-      <Route path="/" element={<Home />} />
-    </Router>
+    <AuthenticationProvider>
+      <Router>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<SecureRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+      </Router>
+    </AuthenticationProvider>
   );
 };
 
